@@ -15,14 +15,27 @@ export type ComicDataWrapper = {
     };
 };
 
-export const fetchInitialComics = async () => {
-    const url = `${API_HOST}/v1/public/comics?apikey=${API_KEY}`;
+const fetchJsonOrNull = async <T>(url: string, params?: RequestInit) => {
     try {
-        return await fetch(url).then(resp => resp.json()) as Comic;
+        return (await fetch(url, params).then((resp) => resp.json())) as T;
     } catch (error: unknown) {
         if (error instanceof Error) {
             console.warn(error.message);
         }
         return null;
     }
+};
+
+export const fetchInitialComics = async () => {
+    return await fetchJsonOrNull<ComicDataWrapper>(
+        `${API_HOST}/v1/public/comics?apikey=${API_KEY}`,
+    );
+};
+
+export const fetchComic = async (id: number) => {
+    const obj = await fetchJsonOrNull<object>(
+        `${API_HOST}/v1/public/comics/${id}`,
+    );
+    console.log(obj);
+    return obj;
 };
