@@ -14,16 +14,18 @@ const pickRandom = <T>(element: T[], count: number) => {
 };
 
 const main = async () => {
-    let comics = (await fetchInitialComics())!.data.results;
+    let comics = (await fetchInitialComics())!.data.results.filter(result => {
+     return result.characters.available > 0
+    });
     for (const comic of comics) {
         comic.images = comic.images.filter((img) => !img.path.includes("image_not_available"));
     }
     comics = comics.filter(({ images }) => images.length);
-    comics = pickRandom(comics, 6);
+    comics = pickRandom(comics, 14);
     // TODO: display the comics
     console.log(comics);
- 
     renderInitial(comicsDiv, comics)
+   
     console.log(await fetchComic(331));
 };
 
