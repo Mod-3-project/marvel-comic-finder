@@ -33,9 +33,8 @@ export const fetchInitialComics = async () => {
 };
 
 export const fetchComic = async (id: number) => {
-    const obj = await fetchJsonOrNull<object>(
-        `${API_HOST}/v1/public/comics/${id}`,
+    const obj = await fetchJsonOrNull<ComicDataWrapper>(
+        `${API_HOST}/v1/public/comics/${id}?apikey=${API_KEY}`,
     );
-    console.log(obj);
-    return obj;
+    return obj?.data.results?.[0];
 };

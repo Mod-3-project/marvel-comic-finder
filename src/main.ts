@@ -1,7 +1,8 @@
-import { fetchInitialComics } from "./fetch-functions";
+import { fetchComic, fetchInitialComics } from "./fetch-functions";
 
 const main = async () => {
-    await fetchInitialComics();
+    console.log(await fetchInitialComics());
+    console.log(await fetchComic(331));
 };
 
 main();
