@@ -6,8 +6,8 @@ export type Comic = {
     title: string;
     issueNumber: number;
     description: string;
-    resourceURI: string; // host/v1/public/comics/{id}
-    images: { path: string; extension: string }[];
+    resourceURI: string;
+    images: { path: string, extension: string}[];// host/v1/public/comics/{id}
 };
 
 export type ComicDataWrapper = {

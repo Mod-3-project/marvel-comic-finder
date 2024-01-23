@@ -1,4 +1,5 @@
 import { fetchComic, fetchInitialComics } from "./fetch-functions";
+import { comicsDiv, renderInitial } from "./render-functions";
 
 const randInt = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min)) + min;
@@ -19,9 +20,10 @@ const main = async () => {
     }
     comics = comics.filter(({ images }) => images.length);
     comics = pickRandom(comics, 6);
-
     // TODO: display the comics
     console.log(comics);
+ 
+    renderInitial(comicsDiv, comics)
     console.log(await fetchComic(331));
 };
 
