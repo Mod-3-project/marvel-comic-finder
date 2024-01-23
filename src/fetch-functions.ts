@@ -7,6 +7,7 @@ export type Comic = {
     issueNumber: number;
     description: string;
     resourceURI: string; // host/v1/public/comics/{id}
+    images: { path: string; extension: string }[];
 };
 
 export type ComicDataWrapper = {
@@ -26,9 +27,9 @@ const fetchJsonOrNull = async <T>(url: string, params?: RequestInit) => {
     }
 };
 
-export const fetchInitialComics = async () => {
+export const fetchInitialComics = async (limit: number = 20, offset: number = 0) => {
     return await fetchJsonOrNull<ComicDataWrapper>(
-        `${API_HOST}/v1/public/comics?apikey=${API_KEY}`,
+        `${API_HOST}/v1/public/comics?apikey=${API_KEY}&limit=${limit}&offset=${offset}`,
     );
 };
 
