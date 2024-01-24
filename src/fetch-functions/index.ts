@@ -1,5 +1,5 @@
-export * from "./characters";
-export * from "./comics";
+export * from "./character-fetch";
+export * from "./comic-fetch";
 
 export type DataContainer<T> = {
     offset?: number;

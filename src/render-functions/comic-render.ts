@@ -1,4 +1,4 @@
-import type { Comic } from "../fetch-functions/comics";
+import type { Comic } from "../fetch-functions/comic-fetch";
 
 const el = (
     tag: keyof HTMLElementTagNameMap,
