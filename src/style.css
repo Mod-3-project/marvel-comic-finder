@@ -55,7 +55,7 @@ main {
 #comic-dialog {
     padding: 20px;
     font-size: 10px;
-    overflow: hidden auto;
+    overflow: auto;
     z-index: 1000;
     background-color: white;
     position: fixed;
@@ -90,6 +90,9 @@ img {
 .modal-chars * {
     font-size: 15px;
     text-decoration: none;
+    color: blue;
+    cursor: pointer;
+    width: max-content;
 }
 
 button {

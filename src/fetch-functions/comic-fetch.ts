@@ -1,4 +1,4 @@
-import { API_HOST, API_KEY, ResponseWrapper, fetchJson } from ".";
+import { type Image, API_HOST, API_KEY, ResponseWrapper, fetchJson } from ".";
 
 export type Comic = {
     id: number;
@@ -6,7 +6,7 @@ export type Comic = {
     issueNumber: number;
     description: string;
     resourceURI: string;
-    images: { path: string; extension: string }[];
+    images: Image[];
     characters: {
         available: number;
         collectionURI: string;

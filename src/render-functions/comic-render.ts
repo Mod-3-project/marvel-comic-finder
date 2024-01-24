@@ -1,3 +1,4 @@
+import { Character } from "../fetch-functions";
 import type { Comic } from "../fetch-functions/comic-fetch";
 
 const el = (
@@ -34,17 +35,46 @@ export const renderError = (div: HTMLElement, message: string) => {
     div.append(el("h3", { class: "error" }, [message]));
 };
 
-export const renderComicModal = (div: HTMLElement, { title, issueNumber, characters }: Comic) => {
+const renderModal = (div: HTMLElement, render: (div: HTMLElement) => void) => {
     div.innerHTML = "";
-    div.append(
-        el("img", { class: "close", src: "/cross.png", width: "30px" }),
-        el("h2", {}, [title]),
-        el("h2", {}, [`Issue Number: ${issueNumber}`]),
-        el("h2", {}, ["Characters"]),
-        el(
-            "ul",
-            { class: "modal-chars", readOnly: "true" },
-            characters.items.map(({ name }) => el("li", {}, [el("a", { href: "" }, [name])])),
-        ),
-    );
+
+    const content = el("div", { class: "modal-content" });
+    render(content);
+
+    div.append(el("img", { class: "close", src: "/cross.png", width: "30px" }), content);
+};
+
+export const renderComicModal = (div: HTMLElement, { title, issueNumber, characters }: Comic) => {
+    renderModal(div, (content) => {
+        content.append(
+            el("h2", {}, [title]),
+            el("h2", {}, [`Issue Number: ${issueNumber}`]),
+            el("h2", {}, ["Characters"]),
+            el(
+                "ul",
+                { class: "modal-chars" },
+                characters.items.map(({ name, resourceURI }) => {
+                    const id = resourceURI.split("/");
+                    return el("li", { "data-char-id": id[id.length - 1] }, [name]);
+                }),
+            ),
+        );
+    });
+};
+
+export const renderCharModal = (div: HTMLElement, { name, comics, thumbnail }: Character) => {
+    renderModal(div, (content) => {
+        content.append(
+            el("h2", {}, [name]),
+            el("img", { src: `${thumbnail.path}.${thumbnail.extension}`, width: "200px" }),
+            el("h2", {}, ["Comics"]),
+            el(
+                "ul",
+                { class: "modal-chars" },
+                comics.items.map(({ name, resourceURI }) => {
+                    return el("li", {}, [name]);
+                }),
+            ),
+        );
+    });
 };

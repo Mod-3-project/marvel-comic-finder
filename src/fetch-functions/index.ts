@@ -7,12 +7,17 @@ export type DataContainer<T> = {
     total?: number;
     count?: number;
     results?: T[];
-}
+};
 
 export type ResponseWrapper<T> = {
     code: number;
     message?: string;
     data?: DataContainer<T>;
+};
+
+export type Image = {
+    path: string;
+    extension: string;
 };
 
 export const API_KEY = import.meta.env.VITE_API_KEY;

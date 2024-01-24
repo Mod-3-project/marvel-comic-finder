@@ -1,9 +1,15 @@
-import { API_HOST, API_KEY, ResponseWrapper, fetchJson } from ".";
+import { type Image, API_HOST, API_KEY, ResponseWrapper, fetchJson } from ".";
 
 export type Character = {
     id: number;
     name: string;
-    image: { path: string; url: string };
+    thumbnail: Image;
+    comics: {
+        available: number;
+        returned: number;
+        collectionURL: string;
+        items: { name: string; resourceURI: string }[];
+    };
 };
 
 export type CharacterData = ResponseWrapper<Character>;
@@ -11,7 +17,7 @@ export type CharacterData = ResponseWrapper<Character>;
 export const fetchCharacter = async (id: number) => {
     const url = new URL(`/v1/public/characters/${id}`, API_HOST);
     url.searchParams.set("apikey", API_KEY);
-    return (await fetchJson<any>(url, { cache: "force-cache" }))?.data?.results?.[0];
+    return (await fetchJson<CharacterData>(url, { cache: "force-cache" }))?.data?.results?.[0];
 };
 
 export type FetchCharacters = {

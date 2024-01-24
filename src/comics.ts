@@ -1,5 +1,11 @@
-import { FetchCharacters, FetchComics, fetchComic, fetchComicList } from "./fetch-functions";
-import { renderComics, renderComicModal, renderError } from "./render-functions/comic-render";
+import {
+    FetchCharacters,
+    FetchComics,
+    fetchCharacter,
+    fetchComic,
+    fetchComicList,
+} from "./fetch-functions";
+import { renderComics, renderComicModal, renderError, renderCharModal } from "./render-functions/comic-render";
 
 const randInt = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min;
 
@@ -29,13 +35,21 @@ const fetchComicsAndFilter = async (params: FetchComics | FetchCharacters = {}) 
 };
 
 const main = async () => {
-    const comicModalDiv = document.querySelector<HTMLDivElement>("#comic-dialog")!;
-    comicModalDiv.addEventListener("click", (e) => {
+    const modalDiv = document.querySelector<HTMLDivElement>("#comic-dialog")!;
+    modalDiv.addEventListener("click", async (e) => {
         if (!(e.target as HTMLElement).classList.contains("close")) {
-            return;
+            const charId = (e.target as HTMLElement)?.dataset.charId;
+            if (charId) {
+                const character = await fetchCharacter(Number(charId));
+                if (!character) {
+                    renderError(modalDiv, "Error retriving data for this character.");
+                    return;
+                }
+                renderCharModal(modalDiv, character);
+            }
+        } else {
+            modalDiv.style.display = "none";
         }
-
-        comicModalDiv.style.display = "none";
     });
 
     const comicsDiv = document.querySelector<HTMLDivElement>("#comics-display")!;
@@ -47,13 +61,13 @@ const main = async () => {
 
         const comicRes = await fetchComic(Number(id));
         if (!comicRes) {
-            renderError(comicModalDiv, "Error retriving data for this comic.");
+            renderError(modalDiv, "Error retriving data for this comic.");
             return;
         }
-        renderComicModal(comicModalDiv, comicRes);
+        renderComicModal(modalDiv, comicRes);
         console.log(comicRes);
 
-        comicModalDiv.style.display = "block";
+        modalDiv.style.display = "block";
     });
 
     const searchForm = document.querySelector<HTMLFormElement>("#search")!;
