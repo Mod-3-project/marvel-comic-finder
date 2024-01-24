@@ -1,6 +1,12 @@
 const API_KEY = import.meta.env.VITE_API_KEY;
 const API_HOST = "https://gateway.marvel.com:443";
 
+
+
+
+
+//CODE TO FETCH COMICS
+
 export type Comic = {
     id: number;
     title: string;
@@ -15,6 +21,7 @@ export type Comic = {
         returned: number;
     };
 };
+
 
 export type ComicDataWrapper = {
     code: number;
@@ -39,6 +46,7 @@ export type FetchComics = {
     title?: string;
 };
 
+
 export const fetchComicList = async ({ limit, offset, title }: FetchComics = {}) => {
     const url = new URL("/v1/public/comics", API_HOST);
     url.searchParams.set("apikey", API_KEY);
@@ -56,5 +64,34 @@ export const fetchComicList = async ({ limit, offset, title }: FetchComics = {})
 export const fetchComic = async (id: number) => {
     const url = new URL(`/v1/public/comics/${id}`, API_HOST);
     url.searchParams.set("apikey", API_KEY);
-    return (await fetchJson<ComicDataWrapper>(url, { cache: "force-cache" }))?.data?.results?.[0];
+    return (await fetchJson<ComicDataWrapper>(url, { cache: "force-cache"}))?.data?.results?.[0];
 };
+
+
+//CODE TO FETCH CHARACTERS
+
+export type Character = {
+    id: number;
+    name: string;
+    image: {path: string, url: string}
+}
+export type FetchCharacters = {
+    limit?: number;
+    offset?: number;
+    name?: string;
+}
+
+
+export const fetchCharacters = async ({limit, offset, name}: FetchCharacters) => {
+    const url =  new URL('/v1/public/characters', API_HOST);
+    url.searchParams.set("apikey", API_KEY);
+    url.searchParams.set("limit", String(limit ?? 50));
+    url.searchParams.set("offset", String(offset ?? 0));
+    if (name) url.searchParams.set('name', name)
+    //Wrapper the same as comic wrapper
+    const res =  (await fetchJson<ComicDataWrapper>(url, { cache: "force-cache" }))?.data?.results?.[0];
+    console.log(res)
+    return res
+}
+
+fetchCharacters({limit: 10})

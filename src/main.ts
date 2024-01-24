@@ -1,4 +1,4 @@
-import { type FetchComics, fetchComic, fetchComicList } from "./fetch-functions";
+import { type FetchComics, fetchComic, fetchComicList, FetchCharacters, fetchCharacters } from "./fetch-functions";
 import { renderComics, renderComicModal, renderError } from "./render-functions";
 
 const randInt = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min;
@@ -15,7 +15,7 @@ const pickRandom = <T>(arr: T[], count: number) => {
     return result;
 };
 
-const fetchComicsAndFilter = async (params: FetchComics = {}) => {
+const fetchComicsAndFilter = async (params: FetchComics | FetchCharacters = {}) => {
     const result = await fetchComicList(params);
     if (!result || !result.data) {
         return;
@@ -79,6 +79,8 @@ const main = async () => {
         renderComics(comicsDiv, pickRandom(comics, 14));
         console.log(comics);
     }
+
+
 };
 
 main();
