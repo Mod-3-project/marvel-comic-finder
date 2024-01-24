@@ -47,8 +47,10 @@ export const fetchComicList = async ({ limit, offset, title }: FetchComics = {})
     if (title) {
         url.searchParams.set("title", title);
     }
-
-    return await fetchJson<ComicDataWrapper>(url);
+    console.log(url.searchParams.get('title'))
+    const res =  await fetchJson<ComicDataWrapper>(url);
+    console.log(res);
+    return res
 };
 
 export const fetchComic = async (id: number) => {

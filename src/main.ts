@@ -46,7 +46,7 @@ const main = async () => {
             return;
         }
 
-        const comicRes = await fetchComic(Number(id));
+        const comicRes: any = await fetchComic(Number(id));
         if (!comicRes) {
             console.log(`fetch comic ${id} failed, probably rate limited...`);
             return;
@@ -60,11 +60,10 @@ const main = async () => {
     const searchForm = document.querySelector<HTMLFormElement>("#search")!;
     searchForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        searchForm.reset();
-
         const { title } = Object.fromEntries(new FormData(searchForm));
         const comics = await fetchComicsAndFilter({ title: title as string });
         renderComics(comicsDiv, comics);
+        searchForm.reset();
     });
 
     const comics = pickRandom(await fetchComicsAndFilter(), 14);

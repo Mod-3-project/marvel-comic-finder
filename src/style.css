@@ -3,6 +3,10 @@
 :root {
     font-family: "Red Hat Text", sans-serif;
 }
+main {
+  display: flex;
+  flex-direction: column;
+}
 
 #comics-display {
     padding-top: 50px;
@@ -70,4 +74,14 @@ img {
 
 .modal-chars {
     width: 100%;
+}
+
+button {
+  width: 50px;
+  height: 25px;
+  
+}
+
+#search {
+  justify-self: center;
 }
