@@ -17,6 +17,8 @@ export type Comic = {
 };
 
 export type ComicDataWrapper = {
+    code: number;
+    message?: string;
     data?: {
         results: Comic[];
     };

@@ -18,7 +18,7 @@ const pickRandom = <T>(arr: T[], count: number) => {
 const fetchComicsAndFilter = async (params: FetchComics = {}) => {
     const result = await fetchComicList(params);
     if (!result || !result.data) {
-        console.log("fetch comic list failed, probably rate limited...");
+        console.log("fetch comic list failed, probably rate limited... data:", result);
         return [];
     }
 
@@ -55,6 +55,16 @@ const main = async () => {
         console.log(comicRes);
 
         comicModalDiv.style.display = "block";
+    });
+
+    const searchForm = document.querySelector<HTMLFormElement>("#search")!;
+    searchForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        searchForm.reset();
+
+        const { title } = Object.fromEntries(new FormData(searchForm));
+        const comics = await fetchComicsAndFilter({ title: title as string });
+        renderComics(comicsDiv, comics);
     });
 
     const comics = pickRandom(await fetchComicsAndFilter(), 14);

@@ -6,14 +6,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Vite + TS</title>
         <link rel="stylesheet" href="/src/style.css" />
+        <script type="module" src="/src/main.ts"></script>
     </head>
     <body>
-        <div id="app">
-            <div id="nav"></div>
-            <div id="search"></div>
+        <nav></nav>
+        <main>
+            <form id="search">
+                <h2>Comic Finder</h2>
+                <input type="text" name="title" placeholder="Search by title...">
+            </form>
             <div id="comics-display"></div>
             <div id="comic-dialog"></div>
-        </div>
-        <script type="module" src="/src/main.ts"></script>
+        </main>
     </body>
 </html>
