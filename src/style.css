@@ -3,6 +3,16 @@
 :root {
     font-family: "Red Hat Text", sans-serif;
 }
+::-webkit-scrollbar {
+  width: 5px; 
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 6px; 
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -77,11 +87,20 @@ img {
 }
 
 button {
-  width: 50px;
-  height: 25px;
-  
+  width: 60px;
+  height: 30.5px;
+
 }
 
 #search {
-  justify-self: center;
+  margin:  0 auto
+}
+
+.modal-chars {
+  height: 200px;
+  pointer-events:stroke;
+}
+
+input {
+  height: 25px
 }

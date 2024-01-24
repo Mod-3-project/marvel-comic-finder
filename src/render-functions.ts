@@ -41,9 +41,8 @@ export const renderComicModal = (div: HTMLElement, { title, issueNumber, charact
         el("h2", {}, [title]),
         el("h2", {}, [`Issue Number: ${issueNumber}`]),
         el("h2", {}, ["Characters"]),
-        el("h3", { class: "modal-chars" }, [
-            characters.items.map(({ name }) => name).join(),
-            el("br"),
+        el("textarea", { class: "modal-chars", readOnly: 'true'}, [
+            characters.items.map(({ name }) => name).join('\n'),
         ]),
     );
 };
