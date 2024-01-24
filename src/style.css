@@ -18,7 +18,7 @@ main {
   flex-direction: column;
 }
 
-#comics-display {
+#comics-display, #characters-display {
     padding-top: 50px;
     display: flex;
     flex-wrap: wrap;
@@ -26,7 +26,7 @@ main {
     justify-content: center;
 }
 
-.comic-card {
+.comic-card, .character-card {
     margin-top: 25px;
     align-items: center;
     cursor: pointer;
@@ -38,11 +38,11 @@ main {
     transition: all 0.3s;
 }
 
-.comic-card:hover {
+.comic-card:hover, .character-card: hover {
     transform: translateY(-10px);
 }
 
-.comic-text {
+.comic-text, .character-text {
     position: absolute;
     transform: translateY(-50px);
     text-overflow: ellipsis;
@@ -52,7 +52,7 @@ main {
     white-space: nowrap;
 }
 
-#comic-dialog {
+#comic-dialog, #character-dialog {
     padding: 20px;
     font-size: 10px;
     overflow: auto;

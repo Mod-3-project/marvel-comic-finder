@@ -7,9 +7,9 @@ import {
 } from "./fetch-functions";
 import { renderComics, renderComicModal, renderError, renderCharModal } from "./render-functions/comic-render";
 
-const randInt = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min;
+export const randInt = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min;
 
-const pickRandom = <T>(arr: T[], count: number) => {
+export const pickRandom = <T>(arr: T[], count: number) => {
     const result = Array<T>(count);
     for (let i = 0; i < count; i++) {
         if (!arr.length) {
@@ -21,7 +21,7 @@ const pickRandom = <T>(arr: T[], count: number) => {
     return result;
 };
 
-const fetchComicsAndFilter = async (params: FetchComics | FetchCharacters = {}) => {
+const fetchComicsAndFilter = async (params: FetchComics = {}) => {
     const result = await fetchComicList(params);
     if (!result || !result.data?.results) {
         return;

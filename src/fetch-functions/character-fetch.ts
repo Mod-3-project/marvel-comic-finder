@@ -3,13 +3,8 @@ import { type Image, API_HOST, API_KEY, ResponseWrapper, fetchJson } from ".";
 export type Character = {
     id: number;
     name: string;
-    thumbnail: Image;
-    comics: {
-        available: number;
-        returned: number;
-        collectionURL: string;
-        items: { name: string; resourceURI: string }[];
-    };
+    thumbnail: { path: string; url: string };
+    comics: { available: number, items: {resurceURI: string, name: string}[] }
 };
 
 export type CharacterData = ResponseWrapper<Character>;
