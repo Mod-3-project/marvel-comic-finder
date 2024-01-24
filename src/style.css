@@ -45,7 +45,7 @@ main {
 #comic-dialog {
     padding: 20px;
     font-size: 10px;
-    overflow: scroll;
+    overflow: auto;
     z-index: 1000;
     background-color: white;
     position: fixed;

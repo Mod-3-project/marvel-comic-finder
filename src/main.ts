@@ -1,5 +1,5 @@
 import { type FetchComics, fetchComic, fetchComicList } from "./fetch-functions";
-import { renderComics, renderComicModal } from "./render-functions";
+import { renderComics, renderComicModal, renderError } from "./render-functions";
 
 const randInt = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min;
 
@@ -18,8 +18,7 @@ const pickRandom = <T>(arr: T[], count: number) => {
 const fetchComicsAndFilter = async (params: FetchComics = {}) => {
     const result = await fetchComicList(params);
     if (!result || !result.data) {
-        console.log("fetch comic list failed, probably rate limited... data:", result);
-        return [];
+        return;
     }
 
     const comics = result.data.results.filter(({ characters }) => characters.available > 0);
@@ -46,9 +45,9 @@ const main = async () => {
             return;
         }
 
-        const comicRes: any = await fetchComic(Number(id));
+        const comicRes = await fetchComic(Number(id));
         if (!comicRes) {
-            console.log(`fetch comic ${id} failed, probably rate limited...`);
+            renderError(comicModalDiv, "Error retriving data for this comic.");
             return;
         }
         renderComicModal(comicModalDiv, comicRes);
@@ -62,13 +61,24 @@ const main = async () => {
         e.preventDefault();
         const { title } = Object.fromEntries(new FormData(searchForm));
         const comics = await fetchComicsAndFilter({ title: title as string });
-        renderComics(comicsDiv, comics);
+        if (!comics) {
+            renderError(comicsDiv, "Error retrieving comic list.");
+        } else if (!comics.length) {
+            renderError(comicsDiv, "No comics found.");
+        } else {
+            renderComics(comicsDiv, comics);
+        }
+
         searchForm.reset();
     });
 
-    const comics = pickRandom(await fetchComicsAndFilter(), 14);
-    renderComics(comicsDiv, comics);
-    console.log(comics);
+    const comics = await fetchComicsAndFilter();
+    if (!comics) {
+        renderError(comicsDiv, "Error retrieving comic list.");
+    } else {
+        renderComics(comicsDiv, pickRandom(comics, 14));
+        console.log(comics);
+    }
 };
 
 main();

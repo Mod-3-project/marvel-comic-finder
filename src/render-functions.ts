@@ -29,6 +29,11 @@ export const renderComics = (div: HTMLElement, comics: Comic[]) => {
     );
 };
 
+export const renderError = (div: HTMLElement, message: string) => {
+    div.innerHTML = "";
+    div.append(el("h3", { class: "error" }, [message]));
+};
+
 export const renderComicModal = (div: HTMLElement, { title, issueNumber, characters }: Comic) => {
     div.innerHTML = "";
     div.append(
