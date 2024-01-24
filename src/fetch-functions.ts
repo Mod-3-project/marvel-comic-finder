@@ -47,14 +47,14 @@ export const fetchComicList = async ({ limit, offset, title }: FetchComics = {})
     if (title) {
         url.searchParams.set("title", title);
     }
-    console.log(url.searchParams.get('title'))
-    const res =  await fetchJson<ComicDataWrapper>(url);
+    console.log(url.searchParams.get("title"));
+    const res = await fetchJson<ComicDataWrapper>(url, { cache: "force-cache" });
     console.log(res);
-    return res
+    return res;
 };
 
 export const fetchComic = async (id: number) => {
     const url = new URL(`/v1/public/comics/${id}`, API_HOST);
     url.searchParams.set("apikey", API_KEY);
-    return (await fetchJson<ComicDataWrapper>(url))?.data?.results?.[0];
+    return (await fetchJson<ComicDataWrapper>(url, { cache: "force-cache" }))?.data?.results?.[0];
 };
