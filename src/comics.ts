@@ -1,5 +1,5 @@
-import { type FetchComics, fetchComic, fetchComicList, FetchCharacters, fetchCharacters } from "./fetch-functions";
-import { renderComics, renderComicModal, renderError } from "./render-functions";
+import { type FetchComics, fetchComic, fetchComicList, FetchCharacters, fetchCharacters } from "./fetch-functions/comic-fetch";
+import { renderComics, renderComicModal, renderError } from "./render-functions/comic-render";
 
 const randInt = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min;
 
@@ -44,7 +44,7 @@ const main = async () => {
         if (!id) {
             return;
         }
-
+       
         const comicRes = await fetchComic(Number(id));
         if (!comicRes) {
             renderError(comicModalDiv, "Error retriving data for this comic.");

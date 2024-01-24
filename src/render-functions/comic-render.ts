@@ -1,4 +1,4 @@
-import type { Comic } from "./fetch-functions"
+import type { Comic } from "../fetch-functions/comic-fetch"
 
 const el = (
     tag: keyof HTMLElementTagNameMap,
@@ -37,11 +37,11 @@ export const renderError = (div: HTMLElement, message: string) => {
 export const renderComicModal = (div: HTMLElement, { title, issueNumber, characters }: Comic) => {
     div.innerHTML = "";
     div.append(
-        el("img", { class: "close", src: "/cross.png", width: "30px"}),
+        el("img", { class: "close", src: "/cross.png", width: "30px" }),
         el("h2", {}, [title]),
         el("h2", {}, [`Issue Number: ${issueNumber}`]),
         el("h2", {}, ["Characters"]),
-        el("textarea", { class: "modal-chars", readOnly: 'true'}, [
+        el("textarea", { class: "modal-chars", readOnly: 'true' }, [
             characters.items.map(({ name }) => name).join('\n'),
         ]),
     );
