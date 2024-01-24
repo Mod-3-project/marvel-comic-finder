@@ -1,51 +1,44 @@
-import { Comic } from "./fetch-functions"
+import type { Comic } from "./fetch-functions"
 
-export const comicsDiv = document.getElementById('comics-display')!
-export const comicModalDiv = document.getElementById('comic-dialog')!
+const el = (
+    tag: keyof HTMLElementTagNameMap,
+    attrs: Record<string, string> = {},
+    children: (string | Node)[] = [],
+) => {
+    const el = document.createElement(tag);
+    for (const attr in attrs) {
+        el.setAttribute(attr, attrs[attr]);
+    }
+    el.append(...children);
+    return el;
+};
 
-export const renderModalForComic = (div: HTMLElement, card: Comic) => {
-    if (div) div.innerHTML = `
-    <img class="close" src="/cross.png" width="30px">
-    `
+export const renderComics = (div: HTMLElement, comics: Comic[]) => {
+    div.innerHTML = "";
+    div.append(
+        ...comics.map(({ id, title, images: [image] }) => {
+            return el("div", { class: "comic-card", "data-comic-id": String(id) }, [
+                el("h2", { class: "comic-text" }, [title]),
+                el("img", {
+                    class: "comic-pic",
+                    width: "200px",
+                    src: image ? `${image.path}.${image.extension}` : "",
+                }),
+            ]);
+        }),
+    );
+};
 
-    const title = document.createElement('h2');
-    title.textContent = card.title
-
-    const issueNumber = document.createElement('h2');
-    issueNumber.textContent = `Issue Number: ${String(card.issueNumber)}`;
-
-    const charactersTitle = document.createElement('h2')
-    charactersTitle.textContent = 'Characters'
-
-    const characters = document.createElement('h3')
-    const charactersContent = card.characters.items.map((character: { name: string, resourceURI: string }) => {
-        return character.name
-    })
-
-    characters.innerHTML = charactersContent.join('<br>')
-    console.log(characters.textContent)
-    characters.style.width = '100%'
-    div?.append(title, issueNumber, charactersTitle, characters)
-
-}
-export const renderInitial = (div: HTMLElement, comics: Array<Comic>) => {
-    comics.forEach((comic: Comic) => {
-        const cardDiv = document.createElement('div')
-        cardDiv.className = 'comic-card', cardDiv.id = String(comic.id)
-
-        const h2 = document.createElement('h2')
-        h2.textContent = comic.title, h2.className = 'comic-text'
-
-        const img = document.createElement('img')
-        img.setAttribute('width', '200px'), img.setAttribute('width', '150px'), img.className = 'comicPic'
-
-        const comicImages = comic.images[0]
-        const imgURL = comicImages.path + '.' + comicImages.extension
-        img.src = imgURL
-
-
-        cardDiv.append(h2, img)
-        div.append(cardDiv)
-    })
-}
-
+export const renderComicModal = (div: HTMLElement, { title, issueNumber, characters }: Comic) => {
+    div.innerHTML = "";
+    div.append(
+        el("img", { class: "close", src: "/cross.png", width: "30px"}),
+        el("h2", {}, [title]),
+        el("h2", {}, [`Issue Number: ${issueNumber}`]),
+        el("h2", {}, ["Characters"]),
+        el("h3", { class: "modal-chars" }, [
+            characters.items.map(({ name }) => name).join(),
+            el("br"),
+        ]),
+    );
+};

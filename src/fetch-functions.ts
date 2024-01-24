@@ -7,36 +7,50 @@ export type Comic = {
     issueNumber: number;
     description: string;
     resourceURI: string;
-    images: { path: string, extension: string }[];
-    characters: { available: number, collectionURI: string, items: any, returned: number }// host/v1/public/comics/{id}
+    images: { path: string; extension: string }[];
+    characters: {
+        available: number;
+        collectionURI: string;
+        items: { name: string; resourceURI: string }[];
+        returned: number;
+    };
 };
 
 export type ComicDataWrapper = {
-    data: {
+    data?: {
         results: Comic[];
     };
 };
 
-const fetchJsonOrNull = async <T>(url: string, params?: RequestInit) => {
+const fetchJson = async <T>(url: RequestInfo | URL, params?: RequestInit) => {
     try {
         return (await fetch(url, params).then((resp) => resp.json())) as T;
-    } catch (error: unknown) {
-        if (error instanceof Error) {
-            console.warn(error.message);
-        }
-        return null;
+    } catch (error) {
+        console.warn(error);
+        return;
     }
 };
 
-export const fetchInitialComics = async (limit: number = 50, offset: number = 0) => {
-    return await fetchJsonOrNull<ComicDataWrapper>(
-        `${API_HOST}/v1/public/comics?apikey=${API_KEY}&limit=${limit}&offset=${offset}`,
-    );
+export type FetchComics = {
+    limit?: number;
+    offset?: number;
+    title?: string;
+};
+
+export const fetchComicList = async ({ limit, offset, title }: FetchComics = {}) => {
+    const url = new URL("/v1/public/comics", API_HOST);
+    url.searchParams.set("apikey", API_KEY);
+    url.searchParams.set("limit", String(limit ?? 50));
+    url.searchParams.set("offset", String(offset ?? 0));
+    if (title) {
+        url.searchParams.set("title", title);
+    }
+
+    return await fetchJson<ComicDataWrapper>(url);
 };
 
 export const fetchComic = async (id: number) => {
-    const obj = await fetchJsonOrNull<ComicDataWrapper>(
-        `${API_HOST}/v1/public/comics/${id}?apikey=${API_KEY}`,
-    );
-    return obj?.data.results?.[0];
+    const url = new URL(`/v1/public/comics/${id}`, API_HOST);
+    url.searchParams.set("apikey", API_KEY);
+    return (await fetchJson<ComicDataWrapper>(url))?.data?.results?.[0];
 };
