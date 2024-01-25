@@ -1,4 +1,4 @@
-import type { Character } from "./fetchChar";
+import type { Character } from "../characters/fetchChar";
 
 const el = (
     tag: keyof HTMLElementTagNameMap,
@@ -39,12 +39,12 @@ export const rendercharacterModal = (div: HTMLElement, { name, comics }: Charact
     div.innerHTML = "";
     div.append(
         el("img", { class: "close", src: "/cross.png", width: "30px" }),
-        el("h2", {}, [name]),
+        el("h1", {}, [name]),
         el("h2", {}, ["Featured Comics"]),
         el(
             "ul",
             { class: "modal-chars", readOnly: "true" },
-            comics.items.map(({ name }) => el("li", {}, [el("a", { href: "" }, [name])])),
+            comics.items.map(({ name }) => el("li", {}, [el("a", { href: "" , class: 'linkText'}, [name])])),
         ),
     );
 };

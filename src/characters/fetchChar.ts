@@ -1,4 +1,4 @@
-import { type Image, API_HOST, API_KEY, ResponseWrapper, fetchJson } from "../Comics";
+import { type Image, API_HOST, API_KEY, ResponseWrapper, fetchJson } from "../comics/index";
 
 export type Character = {
     data: any;
@@ -27,8 +27,7 @@ export const fetchCharactersList = async ({ limit, offset, name }: FetchCharacte
     url.searchParams.set("apikey", API_KEY);
     url.searchParams.set("limit", String(limit ?? 50));
     url.searchParams.set("offset", String(offset ?? 0));
-    if (name) url.searchParams.set("name", name);
-    //Wrapper the same as comic wrapper
+    if (name) url.searchParams.set("nameStartsWith", name);
     const res = (await fetchJson<CharacterData>(url, { cache: "force-cache" }))?.data?.results;
     console.log(res);
     return res;

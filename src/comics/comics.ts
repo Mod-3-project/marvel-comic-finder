@@ -1,9 +1,9 @@
 import {
     fetchCharacter,
-} from "../Characters/fetchChar";
+} from "../characters/fetchChar";
 import {FetchComics,
         fetchComic,
-        fetchComicList} from './fetchComics'
+        fetchComicList} from '../comics/fetchComics'
 import { renderComics, renderComicModal, renderError, renderCharModal } from './renderComics'
 
 export const randInt = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min;
@@ -44,7 +44,10 @@ const main = async () => {
                     renderError(modalDiv, "Error retriving data for this character.");
                     return;
                 }
-                renderCharModal(modalDiv, character);
+    
+                    renderCharModal(modalDiv, character);
+              
+                
             }
         } else {
             modalDiv.style.display = "none";

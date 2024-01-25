@@ -1,6 +1,6 @@
 import { pickRandom } from "../comics/comics";
-import { FetchCharacters, fetchCharactersList } from './fetchChar';
-import { renderCharacters, renderError } from '../characters/renderChar';
+import { FetchCharacters, fetchCharacter, fetchCharactersList } from '../characters/fetchChar';
+import { renderCharacters, renderError, rendercharacterModal } from '../characters/renderChar';
 
 
 const fetchCharactersAndFilter = async (params: FetchCharacters = {}) => {
@@ -30,32 +30,33 @@ const main = async () => {
             return;
         }
 
-        // const characterRes = await fetchcharacter(Number(id));
-        // if (!characterRes) {
-        //     renderError(characterModalDiv, "Error retriving data for this character.");
-        //     return;
-        // }
-        // rendercharacterModal(characterModalDiv, characterRes);
-        // console.log(characterRes);
+        const characterRes = await fetchCharacter(Number(id));
+        if (!characterRes) {
+            renderError(characterModalDiv, "Error retriving data for this character.");
+            return;
+        }
+        rendercharacterModal(characterModalDiv, characterRes);
+        console.log(characterRes);
 
         characterModalDiv.style.display = "block";
     });
 
-    // const searchForm = document.querySelector<HTMLFormElement>("#search")!;
-    // searchForm.addEventListener("submit", async (e) => {
-    //     e.preventDefault();
-    //     const { title } = Object.fromEntries(new FormData(searchForm));
-    //     const characters = await fetchcharactersAndFilter({ title: title as string });
-    //     if (!characters) {
-    //         renderError(charactersDiv, "Error retrieving character list.");
-    //     } else if (!characters.length) {
-    //         renderError(charactersDiv, "No characters found.");
-    //     } else {
-    //         rendercharacters(charactersDiv, characters);
-    //     }
+    const searchForm = document.querySelector<HTMLFormElement>("#searchChar")!;
+    searchForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const { name } = Object.fromEntries(new FormData(searchForm));
+        console.log(Object.fromEntries(new FormData(searchForm)))
+        const characters = await fetchCharactersAndFilter({ name: name as string });
+        if (!characters) {
+            renderError(charactersDiv, "Error retrieving character list.");
+        } else if (!characters.length) {
+            renderError(charactersDiv, "No characters found.");
+        } else {
+            renderCharacters(charactersDiv, characters);
+        }
 
-    //     searchForm.reset();
-    // });
+        searchForm.reset();
+    });
 
     const characters = await fetchCharactersAndFilter({ limit: 50 });
     if (!characters) {

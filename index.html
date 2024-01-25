@@ -10,19 +10,35 @@
         <script  src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     </head>
-    <body data-aos="flip-right" >
+    <body  >
         <nav></nav>
-        <main >
-            <form  id="search">
-                <h2>Comic Finder</h2>
+        <main  >
+            <div id="nav"> 
+                <a href="/"><h2>Comic Finder</h2></a>
+                <a href="/characters.html"><h2>Character Finder</h2></a>
+            </div>
+                
+            <form  id="search" >
+               
                 <input type="text" name="title" placeholder="Search by title...">
                 <button type="submit">FIND</button>
             </form>
-            <div id="comics-display"></div>
+            <div  id="comics-display" data-aos="fade-up" data-aos-duration="1000" ></div>
             <div id="comic-dialog"></div>
         </main>
         <script>
-            AOS.init();
+            const fetchUrl = async() => {
+                const url = 'https://www.themealdb.com/api/json/v1/1/filter.php?a=Jamaican'
+                const res =  await fetch(url)
+                const json = await res.json()
+                console.log(json)
+            }
+            fetchUrl()
+            
+            AOS.init()
+            document.getElementsByTagName('main')[0].addEventListener('click', () => {
+                AOS.init()
+            })
           </script>
     </body>
 </html>

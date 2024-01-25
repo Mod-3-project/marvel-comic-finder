@@ -6,17 +6,28 @@
         <title>Vite + TS</title>
         <link rel="stylesheet" href="/src/style.css" />
         <script type="module" src="/src/Characters/characters.ts"></script>
+        <script  src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     </head>
     <body>
         <nav></nav>
         <main >
-            <form id="searchChar">
-                <h2>Character Finder</h2>
-                <input type="text" name="title" placeholder="Search by title...">
+
+            <div id="nav"> 
+                <a href="/"><h2>Comic Finder</h2></a>
+                <a href="/characters.html"><h2>Character Finder</h2></a>
+            </div>
+            <div id="center">
+            <form id="searchChar" className='center'>
+                <input type="text" name="name" placeholder="Search by title...">
                 <button type="submit">FIND</button>
             </form>
-            <div id="characters-display"></div>
+            </div>
+            <div data-aos="fade-down" data-aos-duration="1000" id="characters-display"></div>
             <div id="character-dialog"></div>
         </main>
+        <script>
+            AOS.init();
+          </script>
     </body>
 </html>
