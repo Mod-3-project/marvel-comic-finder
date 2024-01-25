@@ -22,7 +22,8 @@ export const renderCharacters = (div: HTMLElement, characters: Character[]) => {
                 el("img", {
                     class: "character-pic",
                     width: "200px",
-                    src: thumbnail ? `${thumbnail.path}.${thumbnail.url}` : "",
+                    height: '200px',
+                    src: thumbnail ? `${thumbnail.path}.${thumbnail.extension}` : "",
                 }),
             ]);
         }),

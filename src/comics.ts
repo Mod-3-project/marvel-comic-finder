@@ -90,7 +90,7 @@ const main = async () => {
     if (!comics) {
         renderError(comicsDiv, "Error retrieving comic list.");
     } else {
-        renderComics(comicsDiv, pickRandom(comics, 14));
+        renderComics(comicsDiv, pickRandom(comics, 30));
         console.log(comics);
     }
 };

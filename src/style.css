@@ -2,6 +2,7 @@
 
 :root {
     font-family: "Red Hat Text", sans-serif;
+    color: white
 }
 ::-webkit-scrollbar {
   width: 5px; 
@@ -12,37 +13,65 @@
   background: #888; 
   border-radius: 6px; 
 }
+body {
 
+  background-image: url('/11740828_4824750.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 main {
+ 
   display: flex;
   flex-direction: column;
 }
 
 #comics-display, #characters-display {
-    padding-top: 50px;
+    padding-top: 60px;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 40px;
+    
     justify-content: center;
 }
 
 .comic-card, .character-card {
+   
+    background-color: white;
     margin-top: 25px;
     align-items: center;
     cursor: pointer;
     position: relative;
     font-size: 20px;
     border: 1px solid black;
-    border-radius: 10px;
-    padding: 10px;
+    box-shadow: 10px 10px 20px 10px rgba(0, 0, 0, 0.5);
+    padding: 0px;
     transition: all 0.3s;
 }
-
-.comic-card:hover, .character-card: hover {
-    transform: translateY(-10px);
+.character-pic {
+  border-radius: 100%;
+  scale: 1.1;
+  
+}
+.character-card {
+  border-radius: 100%;
+  text-align: center;
+  height: 200px;
+  width: 200px;
+  box-shadow: 0 10px 30px 10px rgba(0, 0, 0, 0.9);
+}
+.comic-card {
+  
+  scale:0.95;
+  box-shadow: 10px 10px 20px 10px rgba(0, 0, 0, 0.5);
+}
+.comic-card:hover, .character-card:hover {
+    transform: translateY(-20px);
+    box-shadow: 0 30px 30px 10px rgba(0, 0, 0, 0.8);
 }
 
 .comic-text, .character-text {
+    z-index: 1000;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
     position: absolute;
     transform: translateY(-50px);
     text-overflow: ellipsis;
@@ -56,7 +85,9 @@ main {
     padding: 20px;
     font-size: 10px;
     overflow: auto;
+    overflow-x: hidden;
     z-index: 1000;
+    color: black;
     background-color: white;
     position: fixed;
     display: none;
@@ -73,7 +104,10 @@ main {
 img {
     pointer-events: none;
 }
-
+.comic-card img {
+  scale: 1.085;
+  transform: translateY(5px) 
+}
 .close {
     position: absolute;
     right: 10px;
