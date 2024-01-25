@@ -1,6 +1,6 @@
-import { pickRandom } from "../Comics/comics";
+import { pickRandom } from "../comics/comics";
 import { FetchCharacters, fetchCharactersList } from './fetchChar';
-import { renderCharacters, renderError } from "./renderChar";
+import { renderCharacters, renderError } from "../characters/renderChar";
 
 
 const fetchCharactersAndFilter = async (params: FetchCharacters = {}) => {

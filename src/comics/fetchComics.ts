@@ -1,4 +1,4 @@
-import { type Image, API_HOST, API_KEY, ResponseWrapper, fetchJson } from "./index";
+import { type Image, API_HOST, API_KEY, ResponseWrapper, fetchJson } from "../comics/index";
 
 export type Comic = {
     id: number;
