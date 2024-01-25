@@ -1,4 +1,4 @@
-import type { Character } from "../fetch-functions/character-fetch";
+import type { Character } from "./fetchChar";
 
 const el = (
     tag: keyof HTMLElementTagNameMap,
@@ -16,7 +16,7 @@ const el = (
 export const renderCharacters = (div: HTMLElement, characters: Character[]) => {
     div.innerHTML = "";
     div.append(
-        ...characters.map(({ id, name, thumbnail}) => {
+        ...characters.map(({ id, name, thumbnail }) => {
             return el("div", { class: "character-card", "data-character-id": String(id) }, [
                 el("h2", { class: "character-text" }, [name]),
                 el("img", {
@@ -35,7 +35,7 @@ export const renderError = (div: HTMLElement, message: string) => {
     div.append(el("h3", { class: "error" }, [message]));
 };
 
-export const rendercharacterModal = (div: HTMLElement, { name,  comics }: Character) => {
+export const rendercharacterModal = (div: HTMLElement, { name, comics }: Character) => {
     div.innerHTML = "";
     div.append(
         el("img", { class: "close", src: "/cross.png", width: "30px" }),

@@ -13,14 +13,15 @@
   background: #888; 
   border-radius: 6px; 
 }
-body {
-
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+main {
   background-image: url('/11740828_4824750.svg');
   background-repeat: no-repeat;
   background-size: cover;
-}
-main {
- 
   display: flex;
   flex-direction: column;
 }
@@ -73,11 +74,11 @@ main {
     z-index: 1000;
     text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
     position: absolute;
-    transform: translateY(-50px);
+    transform: translateY(-60px);
     text-overflow: ellipsis;
     overflow: hidden;
-    width: 150px;
-    font-size: 15px;
+    width: 200px;
+    font-size: 20px;
     white-space: nowrap;
 }
 

@@ -1,16 +1,16 @@
-import { pickRandom } from "./comics";
-import { FetchCharacters, fetchCharactersList } from "./fetch-functions";
-import { renderCharacters, renderError } from "./render-functions/char-render";
+import { pickRandom } from "../Comics/comics";
+import { FetchCharacters, fetchCharactersList } from './fetchChar';
+import { renderCharacters, renderError } from "./renderChar";
 
 
 const fetchCharactersAndFilter = async (params: FetchCharacters = {}) => {
-    const res =  await fetchCharactersList(params);
+    const res = await fetchCharactersList(params);
     if (!res) {
         return;
     }
-    
-   return res.filter((character) => !character.thumbnail.path.includes("image_not_available"))
-    
+
+    return res.filter((character) => !character.thumbnail.path.includes("image_not_available"))
+
 };
 
 const main = async () => {
@@ -57,7 +57,7 @@ const main = async () => {
     //     searchForm.reset();
     // });
 
-    const characters = await fetchCharactersAndFilter({limit: 50});
+    const characters = await fetchCharactersAndFilter({ limit: 50 });
     if (!characters) {
         renderError(charactersDiv, "Error retrieving character list.");
     } else {
@@ -67,3 +67,5 @@ const main = async () => {
 };
 
 main();
+
+

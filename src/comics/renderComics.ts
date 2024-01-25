@@ -1,5 +1,5 @@
-import { Character } from "../fetch-functions";
-import type { Comic } from "../fetch-functions/comic-fetch";
+import { Character } from "../Characters/characters";
+import type { Comic } from "./fetchComics";
 
 const el = (
     tag: keyof HTMLElementTagNameMap,

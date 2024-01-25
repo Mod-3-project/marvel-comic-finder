@@ -6,12 +6,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Vite + TS</title>
         <link rel="stylesheet" href="/src/style.css" />
-        <script type="module" src="/src/comics.ts"></script>
+        <script type="module" src="./src/Comics/comics.ts"></script>
+        <script  src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     </head>
-    <body>
+    <body data-aos="flip-right" >
         <nav></nav>
         <main >
-            <form id="search">
+            <form  id="search">
                 <h2>Comic Finder</h2>
                 <input type="text" name="title" placeholder="Search by title...">
                 <button type="submit">FIND</button>
@@ -19,5 +21,8 @@
             <div id="comics-display"></div>
             <div id="comic-dialog"></div>
         </main>
+        <script>
+            AOS.init();
+          </script>
     </body>
 </html>

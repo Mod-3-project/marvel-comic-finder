@@ -1,11 +1,10 @@
 import {
-    FetchCharacters,
-    FetchComics,
     fetchCharacter,
-    fetchComic,
-    fetchComicList,
-} from "./fetch-functions";
-import { renderComics, renderComicModal, renderError, renderCharModal } from "./render-functions/comic-render";
+} from "../Characters/fetchChar";
+import {FetchComics,
+        fetchComic,
+        fetchComicList} from './fetchComics'
+import { renderComics, renderComicModal, renderError, renderCharModal } from './renderComics'
 
 export const randInt = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min;
 
