@@ -1,5 +1,5 @@
-import { Character } from "../Characters/characters";
-import type { Comic } from "./fetchComics";
+import { Character } from "../characters/fetchChar";
+import type { Comic} from "./fetchComics";
 
 const el = (
     tag: keyof HTMLElementTagNameMap,
@@ -71,7 +71,7 @@ export const renderCharModal = (div: HTMLElement, { name, comics, thumbnail }: C
             el(
                 "ul",
                 { class: "modal-chars" },
-                comics.items.map(({ name, resourceURI }) => {
+                comics.items.map(({ name }) => {
                     return el("li", {}, [name]);
                 }),
             ),
