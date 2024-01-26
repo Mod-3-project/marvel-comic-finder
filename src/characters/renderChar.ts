@@ -44,7 +44,7 @@ export const rendercharacterModal = (div: HTMLElement, { name, comics }: Charact
         el(
             "ul",
             { class: "modal-chars", readOnly: "true" },
-            comics.items.map(({ name }) => el("li", {}, [el("a", { href: "" , class: 'linkText'}, [name])])),
+            comics.items.map(({ name }) => el("li", {}, [el("p", {class: 'linkText'}, [name])])),
         ),
     );
 };

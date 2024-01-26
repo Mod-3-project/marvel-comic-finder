@@ -14,6 +14,9 @@ const fetchCharactersAndFilter = async (params: FetchCharacters = {}) => {
 };
 
 const main = async () => {
+   if(document.getElementById('searchChar')) {
+    (document.getElementById('charFind') as HTMLElement).style.textDecoration = 'underline'
+   }
     const characterModalDiv = document.querySelector<HTMLDivElement>("#character-dialog")!;
     characterModalDiv.addEventListener("click", (e) => {
         if (!(e.target as HTMLElement).classList.contains("close")) {
@@ -46,23 +49,25 @@ const main = async () => {
         e.preventDefault();
         const { name } = Object.fromEntries(new FormData(searchForm));
         console.log(Object.fromEntries(new FormData(searchForm)))
-        const characters = await fetchCharactersAndFilter({ name: name as string });
-        if (!characters) {
-            renderError(charactersDiv, "Error retrieving character list.");
-        } else if (!characters.length) {
-            renderError(charactersDiv, "No characters found.");
-        } else {
-            renderCharacters(charactersDiv, characters);
+        if (name !== '' ) {
+            const characters = await fetchCharactersAndFilter({ name: name as string, limit: 50 });
+            if (!characters) {
+                renderError(charactersDiv, "Error retrieving character list.");
+            } else if (!characters.length) {
+                renderError(charactersDiv, "No characters found.");
+            } else {
+                renderCharacters(charactersDiv, characters);
+            }
+    
+            searchForm.reset();
         }
-
-        searchForm.reset();
     });
 
-    const characters = await fetchCharactersAndFilter({ limit: 50 });
+    const characters = await fetchCharactersAndFilter();
     if (!characters) {
         renderError(charactersDiv, "Error retrieving character list.");
     } else {
-        renderCharacters(charactersDiv, pickRandom((characters), 14));
+        renderCharacters(charactersDiv, pickRandom((characters), 30));
         console.log(characters);
     }
 };

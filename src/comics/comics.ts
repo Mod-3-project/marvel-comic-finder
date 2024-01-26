@@ -34,6 +34,9 @@ const fetchComicsAndFilter = async (params: FetchComics = {}) => {
 };
 
 const main = async () => {
+    if(document.getElementById('search')) {
+        (document.getElementById('find') as HTMLElement).style.textDecoration = 'underline'
+       }
     const modalDiv = document.querySelector<HTMLDivElement>("#comic-dialog")!;
     modalDiv.addEventListener("click", async (e) => {
         if (!(e.target as HTMLElement).classList.contains("close")) {
@@ -76,23 +79,26 @@ const main = async () => {
     searchForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const { title } = Object.fromEntries(new FormData(searchForm));
-        const comics = await fetchComicsAndFilter({ title: title as string });
-        if (!comics) {
-            renderError(comicsDiv, "Error retrieving comic list.");
-        } else if (!comics.length) {
-            renderError(comicsDiv, "No comics found.");
-        } else {
-            renderComics(comicsDiv, comics);
+        if (title != '') {
+            const comics = await fetchComicsAndFilter({ title: title as string, limit: 63 });
+            if (!comics) {
+                renderError(comicsDiv, "Error retrieving comic list.");
+            } else if (!comics.length) {
+                renderError(comicsDiv, "No comics found.");
+            } else {
+                renderComics(comicsDiv, comics);
+            }
+    
+            searchForm.reset();
         }
-
-        searchForm.reset();
+       
     });
 
     const comics = await fetchComicsAndFilter();
     if (!comics) {
         renderError(comicsDiv, "Error retrieving comic list.");
     } else {
-        renderComics(comicsDiv, pickRandom(comics, 30));
+        renderComics(comicsDiv, pickRandom(comics, 99));
         console.log(comics);
     }
 };

@@ -32,7 +32,7 @@ export type FetchComics = {
 export const fetchComicList = async ({ limit, offset, title }: FetchComics = {}) => {
     const url = new URL("/v1/public/comics", API_HOST);
     url.searchParams.set("apikey", API_KEY);
-    url.searchParams.set("limit", String(limit ?? 50));
+    url.searchParams.set("limit", String(limit ?? 99));
     url.searchParams.set("offset", String(offset ?? 0));
     if (title) {
         url.searchParams.set("title", title);
