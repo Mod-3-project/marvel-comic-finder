@@ -6,28 +6,27 @@
         <title>Vite + TS</title>
         <link rel="stylesheet" href="/src/style.css" />
         <script type="module" src="/src/characters/characters.ts"></script>
-        <script  src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     </head>
     <body>
         <nav></nav>
-        <main >
-
-            <div id="nav"> 
+        <main>
+            <div id="nav">
                 <a id="comicFind" href="/"><h2>Comic Finder</h2></a>
-                <a id='charFind' href="/characters.html"><h2>Character Finder</h2></a>
+                <a id="charFind" href="/characters.html"><h2>Character Finder</h2></a>
             </div>
             <div id="center">
-            <form id="searchChar" className='center'>
-                <input type="text" name="name" placeholder="Search by name...">
-                <button type="submit">FIND</button>
-            </form>
+                <form id="searchChar" className="center">
+                    <input type="text" name="name" placeholder="Search by name..." />
+                    <button type="submit">FIND</button>
+                </form>
             </div>
             <div data-aos="fade-down" data-aos-duration="1000" id="characters-display"></div>
             <div id="character-dialog"></div>
         </main>
         <script>
             AOS.init();
-          </script>
+        </script>
     </body>
 </html>

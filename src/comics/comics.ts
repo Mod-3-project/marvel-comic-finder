@@ -1,10 +1,6 @@
-import {
-    fetchCharacter,
-} from "../characters/fetchChar";
-import {FetchComics,
-        fetchComic,
-        fetchComicList} from '../comics/fetchComics'
-import { renderComics, renderComicModal, renderError, renderCharModal } from './renderComics'
+import { fetchCharacter } from "../characters/fetchChar";
+import { FetchComics, fetchComic, fetchComicList } from "../comics/fetchComics";
+import { renderComics, renderComicModal, renderError, renderCharModal } from "./renderComics";
 
 export const randInt = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min;
 
@@ -34,9 +30,9 @@ const fetchComicsAndFilter = async (params: FetchComics = {}) => {
 };
 
 const main = async () => {
-    if(document.getElementById('search')) {
-        (document.getElementById('find') as HTMLElement).style.textDecoration = 'underline'
-       }
+    if (document.getElementById("search")) {
+        (document.getElementById("find") as HTMLElement).style.textDecoration = "underline";
+    }
     const modalDiv = document.querySelector<HTMLDivElement>("#comic-dialog")!;
     modalDiv.addEventListener("click", async (e) => {
         if (!(e.target as HTMLElement).classList.contains("close")) {
@@ -47,10 +43,8 @@ const main = async () => {
                     renderError(modalDiv, "Error retriving data for this character.");
                     return;
                 }
-    
-                    renderCharModal(modalDiv, character);
-              
-                
+
+                renderCharModal(modalDiv, character);
             }
         } else {
             modalDiv.style.display = "none";
@@ -79,7 +73,7 @@ const main = async () => {
     searchForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const { title } = Object.fromEntries(new FormData(searchForm));
-        if (title != '') {
+        if (title != "") {
             const comics = await fetchComicsAndFilter({ title: title as string, limit: 63 });
             if (!comics) {
                 renderError(comicsDiv, "Error retrieving comic list.");
@@ -88,10 +82,9 @@ const main = async () => {
             } else {
                 renderComics(comicsDiv, comics);
             }
-    
+
             searchForm.reset();
         }
-       
     });
 
     const comics = await fetchComicsAndFilter();

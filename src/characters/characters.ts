@@ -1,7 +1,6 @@
 import { pickRandom } from "../comics/comics";
-import { FetchCharacters, fetchCharacter, fetchCharactersList } from '../characters/fetchChar';
-import { renderCharacters, renderError, rendercharacterModal } from '../characters/renderChar';
-
+import { FetchCharacters, fetchCharacter, fetchCharactersList } from "../characters/fetchChar";
+import { renderCharacters, renderError, rendercharacterModal } from "../characters/renderChar";
 
 const fetchCharactersAndFilter = async (params: FetchCharacters = {}) => {
     const res = await fetchCharactersList(params);
@@ -9,14 +8,13 @@ const fetchCharactersAndFilter = async (params: FetchCharacters = {}) => {
         return;
     }
 
-    return res.filter((character) => !character.thumbnail.path.includes("image_not_available"))
-
+    return res.filter((character) => !character.thumbnail.path.includes("image_not_available"));
 };
 
 const main = async () => {
-   if(document.getElementById('searchChar')) {
-    (document.getElementById('charFind') as HTMLElement).style.textDecoration = 'underline'
-   }
+    if (document.getElementById("searchChar")) {
+        (document.getElementById("charFind") as HTMLElement).style.textDecoration = "underline";
+    }
     const characterModalDiv = document.querySelector<HTMLDivElement>("#character-dialog")!;
     characterModalDiv.addEventListener("click", (e) => {
         if (!(e.target as HTMLElement).classList.contains("close")) {
@@ -48,8 +46,8 @@ const main = async () => {
     searchForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const { name } = Object.fromEntries(new FormData(searchForm));
-        console.log(Object.fromEntries(new FormData(searchForm)))
-        if (name !== '' ) {
+        console.log(Object.fromEntries(new FormData(searchForm)));
+        if (name !== "") {
             const characters = await fetchCharactersAndFilter({ name: name as string, limit: 50 });
             if (!characters) {
                 renderError(charactersDiv, "Error retrieving character list.");
@@ -58,7 +56,7 @@ const main = async () => {
             } else {
                 renderCharacters(charactersDiv, characters);
             }
-    
+
             searchForm.reset();
         }
     });
@@ -67,11 +65,9 @@ const main = async () => {
     if (!characters) {
         renderError(charactersDiv, "Error retrieving character list.");
     } else {
-        renderCharacters(charactersDiv, pickRandom((characters), 30));
+        renderCharacters(charactersDiv, pickRandom(characters, 30));
         console.log(characters);
     }
 };
 
 main();
-
-

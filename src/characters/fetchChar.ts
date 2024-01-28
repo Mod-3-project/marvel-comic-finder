@@ -5,7 +5,7 @@ export type Character = {
     id: number;
     name: string;
     thumbnail: { path: string; extension: string };
-    comics: { available: number, items: { resurceURI: string, name: string }[] }
+    comics: { available: number; items: { resurceURI: string; name: string }[] };
 };
 
 export type CharacterData = ResponseWrapper<Character>;

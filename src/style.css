@@ -1,47 +1,46 @@
 @import url("https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@300;400;500&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap");
 :root {
     font-family: "Red Hat Text", sans-serif;
-    color: white
+    color: white;
 }
 #home {
-  font-family: 'Comic Neue', cursive;
-
+    font-family: "Comic Neue", cursive;
 }
 ::-webkit-scrollbar {
-  width: 5px; 
+    width: 5px;
 }
-
 
 ::-webkit-scrollbar-thumb {
-  background: #888; 
-  border-radius: 6px; 
+    background: #888;
+    border-radius: 6px;
 }
-body, html {
-  margin: 0;
-  padding: 0;
-  
+body,
+html {
+    margin: 0;
+    padding: 0;
 }
 main {
-  background-image: url('/11740828_4824750.svg');
-  background-repeat: no-repeat;
-  background-size:cover;
-  display: flex;
-  flex-direction: column;
-  height: 200vh
+    background-image: url("/11740828_4824750.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    height: 200vh;
 }
 
-#comics-display, #characters-display {
+#comics-display,
+#characters-display {
     padding-top: 60px;
     display: flex;
     flex-wrap: wrap;
     gap: 40px;
-    
+
     justify-content: center;
 }
 
-.comic-card, .character-card {
-   
+.comic-card,
+.character-card {
     background-color: white;
     margin-top: 25px;
     align-items: center;
@@ -54,28 +53,28 @@ main {
     transition: all 0.3s;
 }
 .character-pic {
-  border-radius: 100%;
-  scale: 1.1;
-  
+    border-radius: 100%;
+    scale: 1.1;
 }
 .character-card {
-  border-radius: 100%;
-  text-align: center;
-  height: 200px;
-  width: 200px;
-  box-shadow: 0 10px 30px 10px rgba(0, 0, 0, 0.9);
+    border-radius: 100%;
+    text-align: center;
+    height: 200px;
+    width: 200px;
+    box-shadow: 0 10px 30px 10px rgba(0, 0, 0, 0.9);
 }
 .comic-card {
-  
-  scale:0.95;
-  box-shadow: 10px 10px 20px 10px rgba(0, 0, 0, 0.5);
+    scale: 0.95;
+    box-shadow: 10px 10px 20px 10px rgba(0, 0, 0, 0.5);
 }
-.comic-card:hover, .character-card:hover {
+.comic-card:hover,
+.character-card:hover {
     transform: translateY(-20px);
     box-shadow: 0 30px 30px 10px rgba(0, 0, 0, 0.8);
 }
 
-.comic-text, .character-text {
+.comic-text,
+.character-text {
     z-index: 1000;
     text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
     position: absolute;
@@ -87,7 +86,8 @@ main {
     white-space: nowrap;
 }
 
-#comic-dialog, #character-dialog {
+#comic-dialog,
+#character-dialog {
     padding: 20px;
     padding-right: 100px;
     font-size: 10px;
@@ -112,8 +112,8 @@ img {
     pointer-events: none;
 }
 .comic-card img {
-  scale: 1.085;
-  transform: translateY(5px) 
+    scale: 1.085;
+    transform: translateY(5px);
 }
 .close {
     position: absolute;
@@ -136,51 +136,49 @@ img {
     width: 300px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap
+    white-space: nowrap;
 }
 
 button {
-  width: 60px;
-  height: 30.5px;
-
+    width: 60px;
+    height: 30.5px;
 }
 
 #search {
-  margin:  0 auto
+    margin: 0 auto;
 }
 #searchChar {
-  width: fit-content;
-  margin: auto
+    width: fit-content;
+    margin: auto;
 }
 .modal-chars {
-  height: 200px;
-  
-  pointer-events:stroke;
+    height: 200px;
+
+    pointer-events: stroke;
 }
 
 input {
-  height: 25px
+    height: 25px;
 }
 
 #nav {
-  justify-content: center;
-  gap: 10px;
-  text-align: center;
-  display: flex;
-  transition: all 0.3s
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    display: flex;
+    transition: all 0.3s;
 }
 #nav a {
-  color: white;
-  text-decoration: none;
+    color: white;
+    text-decoration: none;
 }
 
 .select {
-  transform: translateY(-10px);
+    transform: translateY(-10px);
 }
 
-@media(max-height: 650px) {
-  #home img {
-    height: 200vh
-  }
+@media (max-height: 650px) {
+    #home img {
+        height: 200vh;
+    }
 }
-

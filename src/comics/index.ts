@@ -1,4 +1,3 @@
-
 export type DataContainer<T> = {
     offset?: number;
     limit?: number;

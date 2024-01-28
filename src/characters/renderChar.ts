@@ -22,7 +22,7 @@ export const renderCharacters = (div: HTMLElement, characters: Character[]) => {
                 el("img", {
                     class: "character-pic",
                     width: "200px",
-                    height: '200px',
+                    height: "200px",
                     src: thumbnail ? `${thumbnail.path}.${thumbnail.extension}` : "",
                 }),
             ]);
@@ -44,7 +44,7 @@ export const rendercharacterModal = (div: HTMLElement, { name, comics }: Charact
         el(
             "ul",
             { class: "modal-chars", readOnly: "true" },
-            comics.items.map(({ name }) => el("li", {}, [el("p", {class: 'linkText'}, [name])])),
+            comics.items.map(({ name }) => el("li", {}, [el("p", { class: "linkText" }, [name])])),
         ),
     );
 };
