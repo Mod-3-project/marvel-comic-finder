@@ -2,13 +2,10 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Comic Finder</title>
         <link rel="stylesheet" href="/src/style.css" />
         <script type="module" src="./src/comics/index.ts"></script>
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     </head>
     <body>
         <main>
@@ -24,19 +21,5 @@
             <div id="comics-display" data-aos="fade-up" data-aos-duration="1000"></div>
             <div id="comic-dialog"></div>
         </main>
-        <script>
-            // const fetchUrl = async () => {
-            //     const url = "https://www.themealdb.com/api/json/v1/1/filter.php?a=Jamaican";
-            //     const res = await fetch(url);
-            //     const json = await res.json();
-            //     console.log(json);
-            // };
-            // fetchUrl();
-
-            AOS.init();
-            document.getElementsByTagName("main")[0].addEventListener("click", () => {
-                AOS.init();
-            });
-        </script>
     </body>
 </html>
