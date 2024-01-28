@@ -1,6 +1,7 @@
 import { pickRandom } from "../utils";
 import { FetchCharacters, fetchCharacter, fetchCharactersList } from "./fetch";
 import { renderCharacters, renderError, renderCharacterModal } from "./render";
+import AOS from "aos";
 
 const fetchCharactersAndFilter = async (params: FetchCharacters = {}) => {
     const res = await fetchCharactersList(params);
@@ -13,6 +14,8 @@ const fetchCharactersAndFilter = async (params: FetchCharacters = {}) => {
 };
 
 const main = async () => {
+    AOS.init();
+
     const characterModalDiv = document.querySelector<HTMLDivElement>("#character-dialog")!;
     characterModalDiv.addEventListener("click", (e) => {
         if (!(e.target as HTMLElement).classList.contains("close")) {

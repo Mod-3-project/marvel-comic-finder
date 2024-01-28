@@ -9,8 +9,12 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/aos": "^3.0.7",
     "prettier": "^3.2.4",
     "typescript": "^5.2.2",
     "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "aos": "^2.3.4"
   }
 }

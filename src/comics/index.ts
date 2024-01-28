@@ -2,6 +2,7 @@ import { fetchCharacter } from "../characters/fetch";
 import { type FetchComics, fetchComic, fetchComicList } from "./fetch";
 import { renderComics, renderComicModal, renderError, renderCharModal } from "./render";
 import { pickRandom } from "../utils";
+import AOS from "aos";
 
 const fetchComicsAndFilter = async (params: FetchComics = {}) => {
     const result = await fetchComicList(params);
@@ -17,6 +18,8 @@ const fetchComicsAndFilter = async (params: FetchComics = {}) => {
 };
 
 const main = async () => {
+    AOS.init();
+
     const modalDiv = document.querySelector<HTMLDivElement>("#comic-dialog")!;
     modalDiv.addEventListener("click", async (e) => {
         if (!(e.target as HTMLElement).classList.contains("close")) {
