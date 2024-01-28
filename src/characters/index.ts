@@ -1,6 +1,6 @@
 import { pickRandom } from "../utils";
 import { FetchCharacters, fetchCharacter, fetchCharactersList } from "./fetch";
-import { renderCharacters, renderError, rendercharacterModal } from "./render";
+import { renderCharacters, renderError, renderCharacterModal } from "./render";
 
 const fetchCharactersAndFilter = async (params: FetchCharacters = {}) => {
     const res = await fetchCharactersList(params);
@@ -13,9 +13,6 @@ const fetchCharactersAndFilter = async (params: FetchCharacters = {}) => {
 };
 
 const main = async () => {
-    if (document.getElementById("searchChar")) {
-        (document.getElementById("charFind") as HTMLElement).style.textDecoration = "underline";
-    }
     const characterModalDiv = document.querySelector<HTMLDivElement>("#character-dialog")!;
     characterModalDiv.addEventListener("click", (e) => {
         if (!(e.target as HTMLElement).classList.contains("close")) {
@@ -37,13 +34,13 @@ const main = async () => {
             renderError(characterModalDiv, "Error retriving data for this character.");
             return;
         }
-        rendercharacterModal(characterModalDiv, characterRes);
+        renderCharacterModal(characterModalDiv, characterRes);
         console.log(characterRes);
 
         characterModalDiv.style.display = "block";
     });
 
-    const searchForm = document.querySelector<HTMLFormElement>("#searchChar")!;
+    const searchForm = document.querySelector<HTMLFormElement>("#search-char")!;
     searchForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const { name } = Object.fromEntries(new FormData(searchForm));

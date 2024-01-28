@@ -17,9 +17,6 @@ const fetchComicsAndFilter = async (params: FetchComics = {}) => {
 };
 
 const main = async () => {
-    if (document.getElementById("search")) {
-        (document.getElementById("find") as HTMLElement).style.textDecoration = "underline";
-    }
     const modalDiv = document.querySelector<HTMLDivElement>("#comic-dialog")!;
     modalDiv.addEventListener("click", async (e) => {
         if (!(e.target as HTMLElement).classList.contains("close")) {

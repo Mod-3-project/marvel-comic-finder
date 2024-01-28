@@ -3,21 +3,20 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Vite + TS</title>
+        <title>Character Finder</title>
         <link rel="stylesheet" href="/src/style.css" />
         <script type="module" src="/src/characters/index.ts"></script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     </head>
     <body>
-        <nav></nav>
         <main>
-            <div id="nav">
-                <a id="comicFind" href="/"><h2>Comic Finder</h2></a>
-                <a id="charFind" href="/characters.html"><h2>Character Finder</h2></a>
-            </div>
+            <nav>
+                <a href="/"><h2>Comic Finder</h2></a>
+                <a id="current-page-link" href="/characters.html"><h2>Character Finder</h2></a>
+            </nav>
             <div id="center">
-                <form id="searchChar" className="center">
+                <form id="search-char" className="center">
                     <input type="text" name="name" placeholder="Search by name..." />
                     <button type="submit">FIND</button>
                 </form>

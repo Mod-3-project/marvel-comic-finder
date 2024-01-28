@@ -147,7 +147,7 @@ button {
 #search {
     margin: 0 auto;
 }
-#searchChar {
+#search-char {
     width: fit-content;
     margin: auto;
 }
@@ -161,16 +161,21 @@ input {
     height: 25px;
 }
 
-#nav {
+nav {
     justify-content: center;
     gap: 10px;
     text-align: center;
     display: flex;
     transition: all 0.3s;
 }
-#nav a {
+
+nav a {
     color: white;
     text-decoration: none;
+}
+
+#current-page-link {
+    text-decoration: underline;
 }
 
 .select {

@@ -35,7 +35,7 @@ export const renderError = (div: HTMLElement, message: string) => {
     div.append(el("h3", { class: "error" }, [message]));
 };
 
-export const rendercharacterModal = (div: HTMLElement, { name, comics }: Character) => {
+export const renderCharacterModal = (div: HTMLElement, { name, comics }: Character) => {
     div.innerHTML = "";
     div.append(
         el("img", { class: "close", src: "/cross.png", width: "30px" }),
@@ -44,7 +44,7 @@ export const rendercharacterModal = (div: HTMLElement, { name, comics }: Charact
         el(
             "ul",
             { class: "modal-chars", readOnly: "true" },
-            comics.items.map(({ name }) => el("li", {}, [el("p", { class: "linkText" }, [name])])),
+            comics.items.map(({ name }) => el("li", {}, [el("p", { class: "link-text" }, [name])])),
         ),
     );
 };
