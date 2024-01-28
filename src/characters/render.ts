@@ -1,4 +1,4 @@
-import type { Character } from "../characters/fetchChar";
+import type { Character } from "./fetch";
 
 const el = (
     tag: keyof HTMLElementTagNameMap,

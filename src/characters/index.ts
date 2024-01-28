@@ -1,9 +1,10 @@
-import { pickRandom } from "../comics/comics";
-import { FetchCharacters, fetchCharacter, fetchCharactersList } from "../characters/fetchChar";
-import { renderCharacters, renderError, rendercharacterModal } from "../characters/renderChar";
+import { pickRandom } from "../utils";
+import { FetchCharacters, fetchCharacter, fetchCharactersList } from "./fetch";
+import { renderCharacters, renderError, rendercharacterModal } from "./render";
 
 const fetchCharactersAndFilter = async (params: FetchCharacters = {}) => {
     const res = await fetchCharactersList(params);
+    console.log(res);
     if (!res) {
         return;
     }
@@ -46,7 +47,6 @@ const main = async () => {
     searchForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const { name } = Object.fromEntries(new FormData(searchForm));
-        console.log(Object.fromEntries(new FormData(searchForm)));
         if (name !== "") {
             const characters = await fetchCharactersAndFilter({ name: name as string, limit: 50 });
             if (!characters) {
@@ -66,7 +66,6 @@ const main = async () => {
         renderError(charactersDiv, "Error retrieving character list.");
     } else {
         renderCharacters(charactersDiv, pickRandom(characters, 30));
-        console.log(characters);
     }
 };
 
